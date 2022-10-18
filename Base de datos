@@ -1,0 +1,62 @@
+create table Persona (
+    idPersona varchar(50) primary key not null,
+    nombrePersona varchar(50),
+    apellidoPPersona varchar(50),
+    apellodpMPersona varchar(50),
+    sexoPersona varchar(50),
+    dniPersona varchar(50),
+    telefonoPersona varchar(50),
+    emailPersona varchar(50)
+);
+
+create table Profesor (
+    idProfesor varchar(50) primary key not null,
+    idPersona varchar(50),
+    estadoProfesor varchar(50),
+    especialidad varchar(50),
+    CONSTRAINT FK_idPP FOREIGN KEY (idPersona) REFERENCES Persona (idPersona)
+);
+
+create table Alumno (
+    idAlumno varchar(50) primary key not null,
+    idPersona varchar(50),
+    edadAlumno varchar(50),
+    CONSTRAINT FK_idPA FOREIGN KEY (idPersona) REFERENCES Persona (idPersona)
+);
+
+create table Usuario (
+    idUsuario varchar(50) primary key not null,
+    usuarioUsuario varchar(50),
+    claveUsario varchar(50),
+    fechaRegistroUsuario varchar(50),
+    idPersona varchar(50),
+    CONSTRAINT FK_idPU FOREIGN KEY (idPersona) REFERENCES Persona (idPersona)
+);
+
+create table Curso (
+    idCurso varchar(50) primary key not null,
+    nombreCurso varchar(50),
+    puntosCurso varchar(50),
+    notaCurso varchar(50)
+);
+
+create table Calificacion (
+    idCalificacion varchar(50) primary key not null,
+    mateCalificacion varchar(50),
+    clCalificacion varchar(50),
+    promedioTotalCalificacion varchar(50),
+    idAlumno varchar(50),
+    idCurso varchar(50),
+    idProfesor varchar(50),
+    CONSTRAINT FK_idAC FOREIGN KEY (idAlumno) REFERENCES Alumno (idAlumno),
+    CONSTRAINT FK_idCC FOREIGN KEY (idCurso) REFERENCES Curso (idCurso),
+    CONSTRAINT FK_idPC FOREIGN KEY (idProfesor) REFERENCES Profesor (idProfesor)
+);
+
+create table Test (
+    idtest varchar(50) primary key not null,
+    testPuntosMat varchar(50),
+    testPuntosCL varchar(50),
+    idAlumno varchar(50),
+    CONSTRAINT FK_idAT FOREIGN KEY (idAlumno) REFERENCES Alumno (idAlumno)
+);
